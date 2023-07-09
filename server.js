@@ -38,7 +38,8 @@ const upload = multer({
 */
 usersRoutes(app, upload);
 
-server.listen(3000, '192.168.234.1' || 'localhost', function() {
+// server.listen(3000, '192.168.234.1' || 'localhost', function() {
+server.listen(3000, '192.168.111.125' || 'localhost', function() {
     console.log('Aplicacion de NodeJS ' + process.pid + ' Iniciada...');
     console.log(`Listening on ${this.address().port}`);
 });

@@ -5,7 +5,47 @@ const User = {};
 
 User.findById = (id, result) => {
 
-    const sql = `SELECT id, email, name, lastname, image, password FROM users WHERE id = ?`;
+    const sql = 
+    `SELECT 
+	    U.id,
+        U.email,
+        U.name,
+        U.lastname,
+        U.image,
+        U.password,
+    
+	    #JSON_ARRAYAGG(
+	    #	JSON_OBJECTGG(
+	    #		'id', CONVERT(R.id, char),
+	    #		'name', R.name,
+	    #		'image', R.image,
+	    #		'route', R.route
+	    #	)
+        #) AS roles
+    
+        CONCAT('[', 
+	    	GROUP_CONCAT(
+	    		JSON_OBJECT(
+	    			'id', R.id,
+	    			'name', R.name,
+	    			'image', R.image,
+	    			'route', R.route
+	    		)
+	    		SEPARATOR ','
+	    	),
+	    ']') AS roles
+        FROM
+            users AS U
+        INNER JOIN
+	        user_has_roles AS UHR 
+        ON 
+        	UHR.id_user = U.id 
+        INNER JOIN 
+        	roles AS R ON UHR.id_rol = R.id
+        WHERE 
+        	id = ?
+        GROUP BY
+        	U.id;`;
 
     db.query(
         sql,
@@ -24,7 +64,47 @@ User.findById = (id, result) => {
 
 User.findByEmail = (email, result) => {
 
-    const sql = `SELECT id, email, name, lastname, image, password FROM users WHERE email = ?`;
+    const sql = 
+    `SELECT 
+	    U.id,
+        U.email,
+        U.name,
+        U.lastname,
+        U.image,
+        U.password,
+    
+	    #JSON_ARRAYAGG(
+	    #	JSON_OBJECTGG(
+	    #		'id', R.id,
+	    #		'name', R.name,
+	    #		'image', R.image,
+	    #		'route', R.route
+	    #	)
+        #) AS roles
+    
+        CONCAT('[', 
+	    	GROUP_CONCAT(
+	    		JSON_OBJECT(
+	    			'id', CONVERT(R.id, char),
+	    			'name', R.name,
+	    			'image', R.image,
+	    			'route', R.route
+	    		)
+	    		SEPARATOR ','
+	    	),
+	    ']') AS roles
+        FROM
+            users AS U
+        INNER JOIN
+	        user_has_roles AS UHR 
+        ON 
+        	UHR.id_user = U.id 
+        INNER JOIN 
+        	roles AS R ON UHR.id_rol = R.id
+        WHERE 
+        	email = ?
+        GROUP BY
+        	U.id;`;
 
     db.query(
         sql,
