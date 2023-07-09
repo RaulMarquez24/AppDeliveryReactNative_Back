@@ -28,7 +28,7 @@ INSERT INTO roles(
     update_at
 )	
 VALUES(
-	'RESTAURANTE',
+	'ADMIN',
     '/restaurant/orders/list',
     CURRENT_TIMESTAMP,
     CURRENT_TIMESTAMP
