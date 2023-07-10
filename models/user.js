@@ -11,6 +11,7 @@ User.findById = (id, result) => {
         U.email,
         U.name,
         U.lastname,
+        U.phone,
         U.image,
         U.password,
     
@@ -70,6 +71,7 @@ User.findByEmail = (email, result) => {
         U.email,
         U.name,
         U.lastname,
+        U.phone,
         U.image,
         U.password,
     
