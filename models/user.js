@@ -44,7 +44,7 @@ User.findById = (id, result) => {
         INNER JOIN 
         	roles AS R ON UHR.id_rol = R.id
         WHERE 
-        	id = ?
+        	U.id = ?
         GROUP BY
         	U.id;`;
 
@@ -104,7 +104,7 @@ User.findByEmail = (email, result) => {
         INNER JOIN 
         	roles AS R ON UHR.id_rol = R.id
         WHERE 
-        	email = ?
+            U.email = ?
         GROUP BY
         	U.id;`;
 
