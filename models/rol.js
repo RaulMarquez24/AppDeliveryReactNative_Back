@@ -9,8 +9,8 @@ Rol.create = (id_user, id_rol, result) => {
             user_has_roles(
                 id_user,
                 id_rol,
-                create_at,
-                update_at
+                created_at,
+                updated_at
             )
         VALUES(?,?,?,?)
         `;
