@@ -34,3 +34,5 @@ Category.create = (category, result) => {
         }
     )
 }
+
+module.exports = Category;
