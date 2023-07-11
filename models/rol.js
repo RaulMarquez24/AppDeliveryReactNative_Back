@@ -19,7 +19,6 @@ Rol.create = (id_user, id_rol, result) => {
             sql,
             [id_user, id_rol, new Date(), new Date()],
             (err, res) => {
-                console.log('ressss',res);
                 if (err) {
                     console.log('error: ', err);
                     result(err, null);
