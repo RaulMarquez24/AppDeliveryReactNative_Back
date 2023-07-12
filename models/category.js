@@ -63,6 +63,40 @@ Category.create = (category, result) => {
     )
 }
 
+Category.update = (category, result) => {
+    const sql = `
+    UPDATE 
+        categories
+    SET
+        name = ?,
+        description = ?,
+        image = ?,
+        updated_at= ?
+    WHERE
+        id = ?
+    `;
+
+    db.query(
+        sql,
+        [
+            category.name,
+            category.description,
+            category.image, 
+            new Date(), 
+            category._id
+        ],
+        (err, res) => {
+            if (err) {
+                console.log('error: ', err);
+                result(err, null);
+            } else {
+                console.log('Id de la categoria actualizada: ', category.id);
+                result(null, category.id);
+            }
+        }
+    )
+}
+
 Category.delete = (id, result) => {
     const sql = `
     DELETE FROM
