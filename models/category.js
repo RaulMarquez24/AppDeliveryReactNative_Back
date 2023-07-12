@@ -83,7 +83,7 @@ Category.update = (category, result) => {
             category.description,
             category.image, 
             new Date(), 
-            category._id
+            category.id
         ],
         (err, res) => {
             if (err) {
