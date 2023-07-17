@@ -32,15 +32,19 @@ module.exports = {
                     await asyncForEach(files, async (file) => {
                         const path = `image_${Date.now()}`;
                         const url = await storage(file, path);
-
+                        //HASTA AQUI BIEN
                         if (url != undefined && url != null) { //CREO LA IMAGEN EN FIREBASE
 
                             if (inserts == 0) { //IMAGEN1
                                 product.image1 = url;
+                                console.log('product.image1:', url);
                             }else if (inserts == 1) { //IMAGEN2
-                                product.imagen2 = url;
+                                product.image2 = url;
+                                console.log('product.image2:', url);
                             }else if (inserts == 2) { //IMAGEN3
-                                product.imagen3 = url;
+                                product.image3 = url;
+                                console.log('product.image3:', url);
+
                             }
                         }
 

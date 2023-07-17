@@ -55,7 +55,7 @@ Product.update = (product, result) => {
         image2 = ?,
         image3 = ?,
         id_category = ?,
-        updated_at
+        updated_at = ?
     WHERE
         id = ?
     `;
@@ -108,40 +108,6 @@ Product.update = (product, result) => {
 //             } else {
 //                 console.log('Listado de categorias: ', data);
 //                 result(null, data);
-//             }
-//         }
-//     )
-// }
-
-// Product.update = (product, result) => {
-//     const sql = `
-//     UPDATE 
-//         products
-//     SET
-//         name = ?,
-//         description = ?,
-//         image = ?,
-//         updated_at= ?
-//     WHERE
-//         id = ?
-//     `;
-
-//     db.query(
-//         sql,
-//         [
-//             product.name,
-//             product.description,
-//             product.image,
-//             new Date(),
-//             product.id
-//         ],
-//         (err, res) => {
-//             if (err) {
-//                 console.log('error: ', err);
-//                 result(err, null);
-//             } else {
-//                 console.log('Id de la categoria actualizada: ', product.id);
-//                 result(null, product.id);
 //             }
 //         }
 //     )
