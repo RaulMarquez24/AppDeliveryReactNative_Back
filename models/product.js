@@ -117,55 +117,27 @@ Product.findByCategory = (id_category, result) => {
     );
 }
 
-// Product.getAll = (result) => {
+Product.delete = (id, result) => {
+    const sql = `
+    DELETE FROM
+        products 
+    WHERE 
+        id = ?
+    `;
 
-//     const sql = `
-//     SELECT
-//         id,
-//         name,
-//         description,
-//         image
-//     FROM
-//         products
-//     ORDER BY
-//         name
-//     `;
-
-//     db.query(
-//         sql,
-//         (err, data) => {
-//             if (err) {
-//                 console.log('error: ', err);
-//                 result(err, null);
-//             } else {
-//                 console.log('Listado de categorias: ', data);
-//                 result(null, data);
-//             }
-//         }
-//     )
-// }
-
-// Product.delete = (id, result) => {
-//     const sql = `
-//     DELETE FROM
-//         products 
-//     WHERE 
-//         id = ?
-//     `;
-
-//     db.query(
-//         sql,
-//         id,
-//         (err, res) => {
-//             if (err) {
-//                 console.log('error: ', err);
-//                 result(err, null);
-//             } else {
-//                 console.log('Id de la categoria eliminada: ', id);
-//                 result(null, id);
-//             }
-//         }
-//     )
-// }
+    db.query(
+        sql,
+        id,
+        (err, res) => {
+            if (err) {
+                console.log('error: ', err);
+                result(err, null);
+            } else {
+                console.log('Id del producto eliminado: ', id);
+                result(null, id);
+            }
+        }
+    )
+}
 
 module.exports = Product;
