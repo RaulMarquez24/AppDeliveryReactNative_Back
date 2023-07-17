@@ -37,14 +37,10 @@ module.exports = {
 
                             if (inserts == 0) { //IMAGEN1
                                 product.image1 = url;
-                                console.log('product.image1:', url);
                             }else if (inserts == 1) { //IMAGEN2
                                 product.image2 = url;
-                                console.log('product.image2:', url);
                             }else if (inserts == 2) { //IMAGEN3
                                 product.image3 = url;
-                                console.log('product.image3:', url);
-
                             }
                         }
 
@@ -78,19 +74,21 @@ module.exports = {
         }
     },
 
-    // async getAll(req, res) {
-    //     Product.getAll((err, data) => {
-    //         if (err) {
-    //             return res.status(501).json({
-    //                 success: false,
-    //                 message: 'Error al listar las productos',
-    //                 error: err
-    //             });
-    //         }
+    async findByCategory(req, res) {
+        const id_category = req.params.id_category;
 
-    //         return res.status(201).json(data);
-    //     });
-    // },
+        Product.findByCategory(id_category, (err, data) => {
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Error al listar los productos',
+                    error: err
+                });
+            }
+
+            return res.status(201).json(data);
+        });
+    },
 
     // async updateWithImage(req, res) {
     //     const product = JSON.parse(req.body.product); // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
