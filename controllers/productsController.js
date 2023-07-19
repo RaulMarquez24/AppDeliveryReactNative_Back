@@ -90,61 +90,98 @@ module.exports = {
         });
     },
 
-    // async updateWithImage(req, res) {
-    //     const product = JSON.parse(req.body.product); // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
+    async updateWithImage(req, res) {
+        const product = JSON.parse(req.body.product); // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
 
-    //     const files = req.files;
+        const files = req.files;
 
-    //     if (files.length > 0) {
-    //         const path = `image_${Date.now()}`;
-    //         const url = await storage(files[0], path);
+        let inserts = 0;
 
-    //         if (url != undefined && url != null) {
-    //             product.image = url;
-    //         }
-    //     }
+        if (files.length === 0) {
+            return res.status(501).json({
+                success: false,
+                message: 'Error al actualizar el producto, no tiene imagenes',
+            });
+        } else {
+            Product.update(product, (err, id_product) => {
 
-    //     Product.update(product, (err, id) => {
+                if (err) {
+                    return res.status(501).json({
+                        success: false,
+                        message: 'Error al actualizar el producto',
+                        error: err
+                    });
+                }
 
-    //         if (err) {
-    //             return res.status(501).json({
-    //                 success: false,
-    //                 message: 'Error al editar la categoria',
-    //                 error: err
-    //             });
-    //         }
+                product.id = id_product;
+                const start = async () => {
+                    await asyncForEach(files, async (file) => {
+                        const path = `image_${Date.now()}`;
+                        const url = await storage(file, path);
+                        //HASTA AQUI BIEN
+                        if (url != undefined && url != null) { //CREO LA IMAGEN EN FIREBASE
 
-    //         return res.status(201).json({
-    //             success: true,
-    //             message: `Categoria actualizada correctamente`,
-    //             data: `${id}`
-    //         });
+                            if (inserts == 0) { //IMAGEN1
+                                product.image1 = url;
+                            }else if (inserts == 1) { //IMAGEN2
+                                product.image2 = url;
+                            }else if (inserts == 2) { //IMAGEN3
+                                product.image3 = url;
+                            }
+                        }
 
-    //     });
-    // },
+                        await Product.update(product, (err, data) => {
+                            
+                            if (err) {
+                                return res.status(501).json({
+                                    success: false,
+                                    message: 'Error al actualizar el producto',
+                                    error: err
+                                });
+                            }
 
-    // async update(req, res) {
+                            inserts = inserts + 1;
 
-    //     const product = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
+                            if (inserts == files.length) { //TERMINO DE ALMACENAR LAS TRES IMAGENES
+                                return res.status(201).json({
+                                    success: true,
+                                    message: `El producto se actualizó correctamente`,
+                                    data: data
+                                });
+                            }
 
-    //     Product.update(product, (err, id) => {
+                        });
+                    });
+                }
 
-    //         if (err) {
-    //             return res.status(501).json({
-    //                 success: false,
-    //                 message: 'Error al editar la categoria',
-    //                 error: err
-    //             });
-    //         }
+                start();
 
-    //         return res.status(201).json({
-    //             success: true,
-    //             message: `Categoria actualizada correctamente`,
-    //             data: `${id}`
-    //         });
+            });
+        }
+    },
 
-    //     });
-    // },
+    async update(req, res) {
+
+        const product = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
+
+        Product.update(product, (err, res) => {
+
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Error al editar el producto',
+                    error: err
+                });
+            }
+
+            return res.status(201).json({
+                success: true,
+                message: `Producto actualizado correctamente`,
+                data: data
+            });
+
+        });
+    },
 
     async delete(req, res) {
         const id = req.params.id;
