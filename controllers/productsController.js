@@ -164,7 +164,7 @@ module.exports = {
 
         const product = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
 
-        Product.update(product, (err, res) => {
+        Product.update(product, (err, data) => {
 
             if (err) {
                 return res.status(501).json({
