@@ -6,7 +6,7 @@ Address.create = (address, result) => {
     INSERT INTO 
         address(
             address,
-            postal_code,
+            zip_code,
             city,
             lat,
             lng,
@@ -21,7 +21,7 @@ Address.create = (address, result) => {
         sql,
         [
             address.address,
-            address.postal_code,
+            address.zip_code,
             address.city,
             address.lat,
             address.lng,
