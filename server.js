@@ -6,7 +6,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const passport = require('passport');
 const multer = require('multer');
-const ip = '192.168.101.1'; //'192.168.189.1'
+const ip = '192.168.189.1'; // '192.168.101.1';
 
 /* 
 * IMPORTAR RUTAS
@@ -14,6 +14,7 @@ const ip = '192.168.101.1'; //'192.168.189.1'
 const usersRoutes = require('./routes/userRoutes');
 const categoriesRoutes = require('./routes/categoryRoutes');
 const productsRoutes = require('./routes/productRoutes');
+const addressRoutes = require('./routes/addressRoutes');
 
 const port = process.env.PORT || 3000;
 
@@ -42,6 +43,7 @@ const upload = multer({
 usersRoutes(app, upload);
 categoriesRoutes(app, upload);
 productsRoutes(app, upload);
+addressRoutes(app);
 
 server.listen(3000, ip || 'localhost', function() {
     console.log('Aplicacion de NodeJS ' + process.pid + ' Iniciada...');
