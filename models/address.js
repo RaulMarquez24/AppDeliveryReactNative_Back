@@ -41,33 +41,36 @@ Address.create = (address, result) => {
     )
 }
 
-// Address.getAll = (result) => {
+Address.findByUser = (id_user, result) => {
 
-//     const sql = `
-//     SELECT
-//         id,
-//         name,
-//         description,
-//         image
-//     FROM
-//         categories
-//     ORDER BY
-//         name
-//     `;
+    const sql = `
+    SELECT
+        CONVERT(id, char) AS id,
+        address,
+        zip_code,
+        city,
+        lat,
+        lng,
+        CONVERT(id_user, char) AS id_user
+    FROM
+        address
+    WHERE
+        id_user = ?
+    `;
 
-//     db.query(
-//         sql,
-//         (err, data) => {
-//             if (err) {
-//                 console.log('error: ', err);
-//                 result(err, null);
-//             } else {
-//                 console.log('Listado de categorias: ', data);
-//                 result(null, data);
-//             }
-//         }
-//     )
-// }
+    db.query(
+        sql,
+        id_user,
+        (err, data) => {
+            if (err) {
+                console.log('error: ', err);
+                result(err, null);
+            } else {
+                result(null, data);
+            }
+        }
+    )
+}
 
 // Address.update = (address, result) => {
 //     const sql = `

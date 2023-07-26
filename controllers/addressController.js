@@ -25,19 +25,21 @@ module.exports = {
         });
     },
 
-    // async getAll(req, res) {
-    //     Address.getAll((err, data) => {
-    //         if (err) {
-    //             return res.status(501).json({
-    //                 success: false,
-    //                 message: 'Error al listar las categorias',
-    //                 error: err
-    //             });
-    //         }
+    async findByUser(req, res) {
+        const id_user = req.params.id_user;
 
-    //         return res.status(201).json(data);
-    //     });
-    // },
+        Address.findByUser(id_user, (err, data) => {
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Error al obtener las direcciones',
+                    error: err
+                });
+            }
+
+            return res.status(201).json(data);
+        });
+    },
 
 //     async update(req, res) {
         
