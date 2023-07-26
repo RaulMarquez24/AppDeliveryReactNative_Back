@@ -106,27 +106,27 @@ Address.findByUser = (id_user, result) => {
 //     )
 // }
 
-// Address.delete = (id, result) => {
-//     const sql = `
-//     DELETE FROM
-//         categories 
-//     WHERE 
-//         id = ?
-//     `;
+Address.delete = (id, result) => {
+    const sql = `
+    DELETE FROM
+        address 
+    WHERE 
+        id = ?
+    `;
 
-//     db.query(
-//         sql,
-//         id,
-//         (err, res) => {
-//             if (err) {
-//                 console.log('error: ', err);
-//                 result(err, null);
-//             } else {
-//                 console.log('Id de la categoria eliminada: ', id);
-//                 result(null, id);
-//             }
-//         }
-//     )
-// }
+    db.query(
+        sql,
+        id,
+        (err, res) => {
+            if (err) {
+                console.log('error: ', err);
+                result(err, null);
+            } else {
+                console.log('Id de la direccion eliminada: ', id);
+                result(null, id);
+            }
+        }
+    )
+}
 
 module.exports = Address;

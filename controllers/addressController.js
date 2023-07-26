@@ -21,7 +21,7 @@ module.exports = {
                 message: `Direccion creada correctamente`,
                 data: `${id}`
             });
-            
+
         });
     },
 
@@ -41,45 +41,45 @@ module.exports = {
         });
     },
 
-//     async update(req, res) {
-        
-//         const address = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
+    //     async update(req, res) {
 
-//         Address.update(address, (err, id) => {
+    //         const address = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
 
-//             if (err) {
-//                 return res.status(501).json({
-//                     success: false,
-//                     message: 'Error al editar la categoria',
-//                     error: err
-//                 });
-//             }
+    //         Address.update(address, (err, id) => {
 
-//             return res.status(201).json({
-//                 success: true,
-//                 message: `Categoria actualizada correctamente`,
-//                 data: `${id}`
-//             });
-            
-//         });
-//     },
+    //             if (err) {
+    //                 return res.status(501).json({
+    //                     success: false,
+    //                     message: 'Error al editar la categoria',
+    //                     error: err
+    //                 });
+    //             }
 
-// async delete(req, res) {
-//     const id = req.params.id;
-//     Address.delete(id, (err, data) =>{
-//         if (err) {
-//             return res.status(501).json({
-//                 success: false,
-//                 message: 'Error al eliminar la categoria',
-//                 error: err
-//             });
-//         }
+    //             return res.status(201).json({
+    //                 success: true,
+    //                 message: `Categoria actualizada correctamente`,
+    //                 data: `${id}`
+    //             });
 
-//         return res.status(201).json({
-//             success: true,
-//             message: `Categoria eliminada correctamente`,
-//             data: `${id}`
-//         });
-//     })
-// }
+    //         });
+    //     },
+
+    async delete(req, res) {
+        const id = req.params.id;
+        Address.delete(id, (err, data) => {
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Error al eliminar la direccion',
+                    error: err
+                });
+            }
+
+            return res.status(201).json({
+                success: true,
+                message: `Direccion eliminada correctamente`,
+                data: `${id}`
+            });
+        })
+    }
 }
