@@ -34,12 +34,35 @@ module.exports = {
                 message: `Orden creada correctamente`,
                 data: `${id}`
             });
-            
+
         });
     },
 
+    async findByStatus(req, res) {
+        const status = req.params.status;
+
+        Order.findByStatus(status, (err, data) => {
+
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Error al listar las ordenes',
+                    error: err
+                });
+            }
+
+            for (const d of data) {
+                d.address = JSON.parse(d.address);
+                d.client = JSON.parse(d.client);
+                d.products = JSON.parse(d.products);
+            }
+
+            return res.status(201).json(data);
+        });
+    }
+
     // async update(req, res) {
-        
+
     //     const order = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
 
     //     Order.update(order, (err, id) => {
@@ -57,7 +80,7 @@ module.exports = {
     //             message: `Categoria actualizada correctamente`,
     //             data: `${id}`
     //         });
-            
+
     //     });
     // },
 
