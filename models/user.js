@@ -63,6 +63,40 @@ User.findById = (id, result) => {
     )
 }
 
+User.findDeliveryMen = (result) => {
+
+    const sql = 
+    `SELECT 
+	    U.id,
+        U.email,
+        U.name,
+        U.lastname,
+        U.phone,
+        U.image
+    FROM
+        users AS U
+    INNER JOIN
+	    user_has_roles AS UHR 
+    ON 
+    	UHR.id_user = U.id 
+    INNER JOIN 
+    	roles AS R ON UHR.id_rol = R.id
+    WHERE 
+        R.id = 2;`;
+
+    db.query(
+        sql,
+        (err, data) => {
+            if (err) {
+                console.log('error: ', err);
+                result(err, null);
+            } else {
+                result(null, data);
+            }
+        }
+    );
+}
+
 User.findByEmail = (email, result) => {
 
     const sql = 
