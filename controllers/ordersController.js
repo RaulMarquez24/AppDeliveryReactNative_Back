@@ -59,7 +59,30 @@ module.exports = {
 
             return res.status(201).json(data);
         });
-    }
+    },
+
+    async updateToDispatched(req, res) {
+
+        const order = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
+
+        Order.updateToDispatched(order.id, order.id_delivery, (err, id_order) => {
+
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Error al editar la orden',
+                    error: err
+                });
+            }
+
+            return res.status(201).json({
+                success: true,
+                message: `Orden actualizada correctamente`,
+                data: `${id_order}`
+            });
+
+        });
+    },
 
     // async update(req, res) {
 

@@ -115,6 +115,37 @@ Order.findByStatus = (status, result) => {
     )
 }
 
+Order.updateToDispatched = (id_order, id_delivery, result) => {
+    const sql = `
+    UPDATE 
+        orders
+    SET
+        id_delivery = ?,
+        status = ?,
+        updated_at= ?
+    WHERE
+        id = ?
+    `;
+
+    db.query(
+        sql,
+        [
+            id_delivery,
+            'DESPACHADO',
+            new Date(),
+            id_order
+        ],
+        (err, res) => {
+            if (err) {
+                console.log('error: ', err);
+                result(err, null);
+            } else {
+                result(null, id_order);
+            }
+        }
+    )
+}
+
 // Order.update = (order, result) => {
 //     const sql = `
 //     UPDATE 
