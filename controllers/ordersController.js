@@ -110,28 +110,28 @@ module.exports = {
         });
     },
 
-    // async update(req, res) {
+    async updateToOnTheWay(req, res) {
 
-    //     const order = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
+        const order = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
 
-    //     Order.update(order, (err, id) => {
+        Order.updateToOnTheWay(order.id, order.id_delivery, (err, id_order) => {
 
-    //         if (err) {
-    //             return res.status(501).json({
-    //                 success: false,
-    //                 message: 'Error al editar la categoria',
-    //                 error: err
-    //             });
-    //         }
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Error al editar la orden',
+                    error: err
+                });
+            }
 
-    //         return res.status(201).json({
-    //             success: true,
-    //             message: `Categoria actualizada correctamente`,
-    //             data: `${id}`
-    //         });
+            return res.status(201).json({
+                success: true,
+                message: `Orden actualizada correctamente`,
+                data: `${id_order}`
+            });
 
-    //     });
-    // },
+        });
+    },
 
     // async delete(req, res) {
     //     const id = req.params.id;
