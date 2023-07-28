@@ -56,18 +56,18 @@ Order.findByStatus = (status, result) => {
 	    	'lng', A.lng
 	    ) AS address,
         JSON_OBJECT(
-	    	'id', CONVERT(U2.id, char),
-	    	'name', U2.name,
-	    	'lastname', U2.lastname,
-	    	'image', U2.image,
-            'phone', U2.phone
-	    ) AS client,
-        JSON_OBJECT(
 	    	'id', CONVERT(U.id, char),
 	    	'name', U.name,
 	    	'lastname', U.lastname,
 	    	'image', U.image,
             'phone', U.phone
+	    ) AS client,
+        JSON_OBJECT(
+	    	'id', CONVERT(U2.id, char),
+	    	'name', U2.name,
+	    	'lastname', U2.lastname,
+	    	'image', U2.image,
+            'phone', U2.phone
 	    ) AS delivery,
         CONCAT('[', 
 	        GROUP_CONCAT(
@@ -145,18 +145,18 @@ Order.findByDeliveryAndStatus = (id_delivery, status, result) => {
 	    	'lng', A.lng
 	    ) AS address,
         JSON_OBJECT(
-	    	'id', CONVERT(U2.id, char),
-	    	'name', U2.name,
-	    	'lastname', U2.lastname,
-	    	'image', U2.image,
-            'phone', U2.phone
-	    ) AS client,
-        JSON_OBJECT(
 	    	'id', CONVERT(U.id, char),
 	    	'name', U.name,
 	    	'lastname', U.lastname,
 	    	'image', U.image,
             'phone', U.phone
+	    ) AS client,
+        JSON_OBJECT(
+	    	'id', CONVERT(U2.id, char),
+	    	'name', U2.name,
+	    	'lastname', U2.lastname,
+	    	'image', U2.image,
+            'phone', U2.phone
 	    ) AS delivery,
         CONCAT('[', 
 	        GROUP_CONCAT(
