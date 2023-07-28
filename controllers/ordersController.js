@@ -55,6 +55,32 @@ module.exports = {
                 d.address = JSON.parse(d.address);
                 d.client = JSON.parse(d.client);
                 d.products = JSON.parse(d.products);
+                d.delivery = JSON.parse(d.delivery);
+            }
+
+            return res.status(201).json(data);
+        });
+    },
+
+    async findByDeliveryAndStatus(req, res) {
+        const id_delivery = req.params.id_delivery;
+        const status = req.params.status;
+
+        Order.findByDeliveryAndStatus(id_delivery, status, (err, data) => {
+
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Error al listar las ordenes',
+                    error: err
+                });
+            }
+
+            for (const d of data) {
+                d.address = JSON.parse(d.address);
+                d.client = JSON.parse(d.client);
+                d.products = JSON.parse(d.products);
+                d.delivery = JSON.parse(d.delivery);
             }
 
             return res.status(201).json(data);
