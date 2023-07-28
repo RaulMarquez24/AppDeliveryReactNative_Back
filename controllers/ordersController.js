@@ -133,6 +133,29 @@ module.exports = {
         });
     },
 
+    async updateToDelivered(req, res) {
+
+        const order = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
+
+        Order.updateToDelivered(order.id, order.id_delivery, (err, id_order) => {
+
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Error al editar la orden',
+                    error: err
+                });
+            }
+
+            return res.status(201).json({
+                success: true,
+                message: `Orden actualizada correctamente`,
+                data: `${id_order}`
+            });
+
+        });
+    },
+
     // async delete(req, res) {
     //     const id = req.params.id;
     //     Order.delete(id, (err, data) =>{
