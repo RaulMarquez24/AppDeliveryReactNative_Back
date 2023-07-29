@@ -7,6 +7,12 @@ const cors = require('cors');
 const passport = require('passport');
 const multer = require('multer');
 const ip = '192.168.189.1'; // '192.168.101.1';
+const io = require('socket.io')(server);
+
+/* 
+* IMPORTAR SOCKETS
+*/
+const ordersSocket = require('./sockets/ordersSocket');
 
 /* 
 * IMPORTAR RUTAS
@@ -33,6 +39,11 @@ require('./config/passport')(passport);
 app.disable('x-powered-by');
 
 app.set('port', port);
+
+/* 
+* LLAMADO A LOS SOCKETS
+*/
+ordersSocket(io);
 
 const upload = multer({
     storage: multer.memoryStorage()
