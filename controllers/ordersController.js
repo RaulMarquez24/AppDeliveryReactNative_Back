@@ -87,6 +87,31 @@ module.exports = {
         });
     },
 
+    async findByClientAndStatus(req, res) {
+        const id_client = req.params.id_client;
+        const status = req.params.status;
+
+        Order.findByClientAndStatus(id_client, status, (err, data) => {
+
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Error al listar las ordenes',
+                    error: err
+                });
+            }
+
+            for (const d of data) {
+                d.address = JSON.parse(d.address);
+                d.client = JSON.parse(d.client);
+                d.products = JSON.parse(d.products);
+                d.delivery = JSON.parse(d.delivery);
+            }
+
+            return res.status(201).json(data);
+        });
+    },
+
     async updateToDispatched(req, res) {
 
         const order = req.body; // CAPTURAR LOS DATOS QUE ENVIA EL CLIENTE
