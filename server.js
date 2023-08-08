@@ -6,8 +6,13 @@ const logger = require('morgan');
 const cors = require('cors');
 const passport = require('passport');
 const multer = require('multer');
-const ip = '192.168.1.10'; //'192.168.189.1'; //
+const ip = '192.168.189.1';
 const io = require('socket.io')(server);
+const mercadopago = require('mercadopago');
+mercadopago.configure({
+    sandbox: true,
+    access_token: 'Bearer TEST-4332423066954571-102200-779dd861dfaa9f6acb7609a1887ee3f3-191014229' // Access token here
+});
 
 /* 
 * IMPORTAR SOCKETS
@@ -22,6 +27,8 @@ const categoriesRoutes = require('./routes/categoryRoutes');
 const productsRoutes = require('./routes/productRoutes');
 const addressRoutes = require('./routes/addressRoutes');
 const ordersRoutes = require('./routes/orderRoutes');
+const mercadoPagoRoutes = require('./routes/mercadoPagoRoutes');
+
 
 const port = process.env.PORT || 3000;
 
@@ -57,6 +64,7 @@ categoriesRoutes(app, upload);
 productsRoutes(app, upload);
 addressRoutes(app);
 ordersRoutes(app);
+mercadoPagoRoutes(app);
 
 server.listen(3000, ip || 'localhost', function() {
     console.log('Aplicacion de NodeJS ' + process.pid + ' Iniciada...');
