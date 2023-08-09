@@ -4,7 +4,7 @@ const OrderHasProducts = require('../models/order_has_products');
 
 mercadopago.configure({
     sandbox: true,
-    access_token: 'Bearer TEST-4332423066954571-102200-779dd861dfaa9f6acb7609a1887ee3f3-191014229' // Access token here
+    access_token: 'TEST-4332423066954571-102200-779dd861dfaa9f6acb7609a1887ee3f3-191014229' // Access token here
 });
 
 module.exports = {
@@ -17,10 +17,10 @@ module.exports = {
 
         const payment_data = {
             token: payment.token,
-            issuer_id: payment.issuer.id,
+            issuer_id: payment.issuer_id,
             payment_method_id: payment.payment_method_id,
             transaction_amount: payment.transaction_amount,
-            installments: payment.installments,
+            installments: parseInt(payment.installments),
             payer: {
                 email: payment.payer.email,
                 identification: {

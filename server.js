@@ -11,7 +11,7 @@ const io = require('socket.io')(server);
 const mercadopago = require('mercadopago');
 mercadopago.configure({
     sandbox: true,
-    access_token: 'Bearer TEST-4332423066954571-102200-779dd861dfaa9f6acb7609a1887ee3f3-191014229' // Access token here
+    access_token: 'TEST-4332423066954571-102200-779dd861dfaa9f6acb7609a1887ee3f3-191014229' // Access token here
 });
 
 /* 
