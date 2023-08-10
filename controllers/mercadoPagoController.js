@@ -39,7 +39,7 @@ module.exports = {
             });
         });
 
-        if (data) {
+        if (data !== undefined && data !== null) {
             console.log('Los datos del cliente son correctos', data.response);
 
             const order = payment.order;
@@ -69,7 +69,7 @@ module.exports = {
                 return res.status(201).json({
                     success: true,
                     message: `Orden creada correctamente`,
-                    data: `${id}`
+                    data: data.response
                 });
 
             });
