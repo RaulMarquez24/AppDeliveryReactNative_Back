@@ -28,6 +28,7 @@ const productsRoutes = require('./routes/productRoutes');
 const addressRoutes = require('./routes/addressRoutes');
 const ordersRoutes = require('./routes/orderRoutes');
 const mercadoPagoRoutes = require('./routes/mercadoPagoRoutes');
+const stripeRoutes = require('./routes/stripeRoutes');
 
 
 const port = process.env.PORT || 3000;
@@ -65,6 +66,7 @@ productsRoutes(app, upload);
 addressRoutes(app);
 ordersRoutes(app);
 mercadoPagoRoutes(app);
+stripeRoutes(app);
 
 server.listen(3000, ip || 'localhost', function() {
     console.log('Aplicacion de NodeJS ' + process.pid + ' Iniciada...');
