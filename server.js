@@ -6,7 +6,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const passport = require('passport');
 const multer = require('multer');
-const ip = '192.168.189.1';
+const ip = '192.168.101.1';//'192.168.189.1';
 const io = require('socket.io')(server);
 const mercadopago = require('mercadopago');
 mercadopago.configure({

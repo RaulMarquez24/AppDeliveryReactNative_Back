@@ -12,6 +12,9 @@ CREATE TABLE users(
     updated_at TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+ALTER TABLE `udemy_delivery`.`users` 
+ADD COLUMN `notification_token` VARCHAR(255) NULL AFTER `password`;
+
 CREATE TABLE roles(
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(90) NOT NULL UNIQUE,

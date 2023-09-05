@@ -72,7 +72,8 @@ User.findDeliveryMen = (result) => {
         U.name,
         U.lastname,
         U.phone,
-        U.image
+        U.image,
+        U.notification_token
     FROM
         users AS U
     INNER JOIN
@@ -259,6 +260,36 @@ User.updateWithoutImage = (user, result) => {
             }
         }
     )
+}
+
+User.updateNotificationToken = (id, token, result) => {
+    const sql = `
+    UPDATE
+        users
+    SET
+        notification_token = ?,
+        updated_at = ?
+    WHERE
+        id = ?
+    `;
+
+    db.query(
+        sql,
+        [
+            token,
+            new Date(),
+            id,
+        ],
+        (err, res) => {
+            if (err) {
+                console.log('error: ', err);
+                result(err, null);
+            } else {
+                console.log('Token actualizado: ', id);
+                result(null, id);
+            }
+        }
+    );
 }
 
 module.exports = User;
